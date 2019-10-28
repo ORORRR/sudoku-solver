@@ -1,5 +1,4 @@
 #ignore idea configuration files
-./**/.idea/
 sudoku_solver/.idea
 
 
