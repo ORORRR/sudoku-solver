@@ -1,5 +1,7 @@
 #ignore idea configuration files
 ./**/.idea/
+sudoku_solver/.idea
+
 
 # Created by https://www.gitignore.io
 
