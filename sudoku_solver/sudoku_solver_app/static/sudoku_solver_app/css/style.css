@@ -34,3 +34,7 @@
 #sudoku .original {
     font-weight: bold;
 }
+
+#sudoku_txt_value{
+    display: none;
+}
