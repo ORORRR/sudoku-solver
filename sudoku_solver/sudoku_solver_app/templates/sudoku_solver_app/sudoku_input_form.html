@@ -1,0 +1,25 @@
+{% extends 'sudoku_solver_app/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <table id="sudoku" class="table table-bordered">
+            {% for row in sudoku %}
+                <tr>
+                    {% for col in  row %}
+                        <td style="height: 50px; width: 50px;">
+                            {% if col != 0 %}
+                                {{ col }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <form action="{% url 'sudoku_solver_app:index' %}" method="post">
+            {% csrf_token %}
+            <input style="display: none" type="text" value="{{ sudoku_txt }}" name="sudoku">
+             <button id="btn-solve" type="submit" class="btn btn-dark">Solve</button>
+        </form>
+    </div>
+{% endblock %}
