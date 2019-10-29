@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="container">
-        <table id="sudoku" class="table table-bordered">
+        <table id="sudoku" class="">
             {% for row in solved_sudoku %}
                 <tr>
                     {% for col in  row %}
@@ -11,11 +11,11 @@
                         {% get_sudoku_box solved_sudoku forloop.parentloop.counter0 forloop.counter0 as solved_current_box %}
 
                         {% if  original_current_box != 0 %}
-                            <td class="original" style="height: 50px; width: 50px;">
+                            <td class="original">
                                 {{ original_current_box }}
                             </td>
                         {% else %}
-                            <td class="solved" style="height: 50px; width: 50px; color: deeppink;">
+                            <td class="solved">
                                 {{ solved_current_box }}
                             </td>
                         {% endif %}
