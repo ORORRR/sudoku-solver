@@ -1,4 +1,5 @@
 {% extends 'sudoku_solver_app/base.html' %}
+{% load sudoku_solver_app_extras %}
 
 {% block content %}
     <div class="container">
@@ -6,13 +7,18 @@
             {% for row in solved_sudoku %}
                 <tr>
                     {% for col in  row %}
-                        <td style="height: 50px; width: 50px;">
-                            {% if col != 0 %}
-                                {{ col }}
-{#                            {% elif solved_sudoku %}#}
-{#                                §#}
-                            {% endif %}
-                        </td>
+                        {% get_sudoku_box original_sudoku forloop.parentloop.counter0 forloop.counter0 as original_current_box %}
+                        {% get_sudoku_box solved_sudoku forloop.parentloop.counter0 forloop.counter0 as solved_current_box %}
+
+                        {% if  original_current_box != 0 %}
+                            <td class="original" style="height: 50px; width: 50px;">
+                                {{ original_current_box }}
+                            </td>
+                        {% else %}
+                            <td class="solved" style="height: 50px; width: 50px; color: deeppink;">
+                                {{ solved_current_box }}
+                            </td>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             {% endfor %}

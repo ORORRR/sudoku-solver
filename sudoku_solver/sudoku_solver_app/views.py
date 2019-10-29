@@ -26,7 +26,8 @@ def index(request):
 
         return render(request, 'sudoku_solver_app/sudoku_input_form.html', {
             'sudoku': sudoku,
-            'sudoku_txt': json.dumps(sudoku)
+            'sudoku_txt': json.dumps(sudoku),
+            'sudoku_size_range': range(len(sudoku))
         })
 
     sudoku = json.loads(sudoku)
@@ -45,5 +46,6 @@ def index(request):
         'original_sudoku': sudoku,
         'solved_sudoku': solved_sudoku['sudoku'],
         'error': error,
-        'sudoku_txt': json.dumps(solved_sudoku['sudoku'])
+        'sudoku_txt': json.dumps(solved_sudoku['sudoku']),
+        'sudoku_size_range': range(len(sudoku))
     })
