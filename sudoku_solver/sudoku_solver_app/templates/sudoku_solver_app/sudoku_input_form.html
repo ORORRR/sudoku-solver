@@ -21,7 +21,6 @@
 
         <form action="{% url 'sudoku_solver_app:index' %}" method="post">
             {% csrf_token %}
-{#            <input id="sudoku_txt_value" style="display: none" type="text" value="{{ sudoku_txt }}" name="sudoku">#}
             <input id="sudoku_txt_value" type="text" value="" name="sudoku">
              <button id="btn-solve" type="submit" class="btn btn-dark">Solve</button>
         </form>

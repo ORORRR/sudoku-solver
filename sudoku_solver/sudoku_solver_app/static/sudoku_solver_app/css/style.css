@@ -38,3 +38,7 @@
 #sudoku_txt_value{
     display: none;
 }
+
+#sudoku .selected-box {
+    background-color: lightblue;
+}
