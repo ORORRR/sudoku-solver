@@ -1,1 +1,11 @@
 language : python
+
+pyhton:
+  - 3.4
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - python manage.py migrate
+  - python manage.py test
