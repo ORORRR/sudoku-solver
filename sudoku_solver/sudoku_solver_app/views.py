@@ -37,10 +37,12 @@ def solve_sudoku(request):
     solved_sudoku = None
     error = None
 
-    if is_sudoku_correct(sudoku):
-        solved_sudoku = solve(sudoku)
-    else:
-        error = "The sudoku is not correct"
+    if not is_sudoku_correct(sudoku):
+        return render(request, 'sudoku_solver_app/sudoku_input_form.html', {
+            'sudoku': sudoku
+        })
+
+    solved_sudoku = solve(sudoku)
 
     return render(request, 'sudoku_solver_app/sudoku_result.html', {
         'original_sudoku': sudoku,

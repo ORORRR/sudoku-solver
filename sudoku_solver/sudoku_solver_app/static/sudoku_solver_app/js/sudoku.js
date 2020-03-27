@@ -1,39 +1,9 @@
-function get_sudoku_obj() {
-    let sudoku = [];
-
-    for (let row = 0; row < 9; row++) {
-        sudoku.push([]);
-        for (let col = 0; col < 9; col++) {
-            let box = $(`#sudoku tr:nth-child(${row + 1}) td:nth-child(${col + 1})`).first();
-
-            if (box.text().trim() !== "") {
-                sudoku[row].push(parseInt(box.text(), 10));
-            } else {
-                sudoku[row].push(0);
-            }
-        }
-    }
-
-    return sudoku;
-}
-
-function get_sudoku_json() {
-    sudoku = get_sudoku_obj();
-    return JSON.stringify(sudoku);
-}
-
 $(document).ready(function () {
-    $("#sudoku_txt_value").attr("value", get_sudoku_json());
+    update_json_representation_of_sudoku();
 
-    $("#sudoku tr td").on('change', function () {
-        $("#sudoku_txt_value").attr("value", get_sudoku_json());
-        console.log( $("#sudoku_txt_value").attr("value"));
-    });
-
-
-    //----------------------------------------
-
-    // fill the sudoku grid
+    //--------------------------------------
+    //     set/unset the selected box
+    //--------------------------------------
     let selected_box = null;
 
     $("#sudoku tr td").on('click', function (event) {
@@ -54,6 +24,9 @@ $(document).ready(function () {
 
     });
 
+    //--------------------------------------
+    //     user input in a box
+    //--------------------------------------
     $(document).keyup(function (event) {
 
         let key = event.key || event.keyCode;
@@ -108,10 +81,128 @@ $(document).ready(function () {
 
         if (selected_box != null && number != null) {
             selected_box.text(number);
-
-            // update json string representation of the grid
-             $("#sudoku_txt_value").attr("value", get_sudoku_json());
+            update_json_representation_of_sudoku();
         }
 
     });
 });
+
+function get_sudoku_obj() {
+    let sudoku = [];
+
+    for (let row = 0; row < 9; row++) {
+        sudoku.push([]);
+        for (let col = 0; col < 9; col++) {
+            let box = $(`#sudoku tr:nth-child(${row + 1}) td:nth-child(${col + 1})`).first();
+
+            if (box.text().trim() !== "") {
+                sudoku[row].push(parseInt(box.text(), 10));
+            } else {
+                sudoku[row].push(0);
+            }
+        }
+    }
+
+    return sudoku;
+}
+
+function get_sudoku_box(row, col){
+    return null;
+}
+
+function get_sudoku_json() {
+    sudoku = get_sudoku_obj();
+    return JSON.stringify(sudoku);
+}
+
+function update_json_representation_of_sudoku(){
+    sudoku_validation();
+    $("#sudoku_txt_value").attr("value", get_sudoku_json());
+}
+
+function sudoku_validation() {
+    let incorrect = false;
+    let sudoku = get_sudoku_obj();
+
+    remove_errors();
+    // this function go through the sudoku
+    // and if it caches an error it puts the faluty boxex in red
+    // and displays an error message
+
+    //check that the sudoku only contains values between 1 and 9
+    for(let row=0; row<9; row++){
+        for(let col=0; col<9; col++){
+            if(sudoku[row][col]< 0 || sudoku[row][col]> 9){
+                //TODO: set the faulty case 
+                incorrect=true;
+            }
+        }
+    }
+
+    //check that in each line, the numbers are all different
+    for(let row=0; row<9; row++){
+        for(let col1=0; col1<9; col1++){
+            for(let col2=0; col2<9; col2++){
+                if(col1!=col2 && sudoku[row][col1]!=0 && sudoku[row][col1] == sudoku[row][col2]){
+                    //TODO: set the 2boxes as faulty
+                    incorrect=true;
+                }
+            }
+        }
+    }
+
+    //check that in each column, the numbers are all different
+    for(let col=0; col<9; col++){
+        for(let row1=0; row1<9; row1++){
+            for(let row2=0; row2<9; row2++){
+                if(row1!=row2 && sudoku[row1][col]!=0 && sudoku[row1][col] == sudoku[row2][col]){
+                    //TODO: set the 2boxes as faulty
+                    incorrect=true;
+                }
+            }
+        }
+    }
+
+    //check that in each square, the numbers are all different
+    for(let num_row_square=0; num_row_square<3; num_row_square++){
+        for(let num_col_square=0; num_col_square<3; num_col_square++){
+            let square_start_row = num_row_square * 3;
+            let square_start_col = num_col_square * 3;
+
+            square = []
+            for(let row=square_start_row; row<square_start_row+3; row++){
+                for(let col=square_start_col; col<square_start_col+3; col++){
+                    square.push(sudoku[row][col])
+                }
+            }
+
+            for(let box1=0; box1<9; box1++){
+                for(let box2=0; box2<9; box2++){
+                    if(box1!=box2 && square[box1]!=0 && square[box1] == square[box2]){
+                        //TODO: set the 2boxes as faulty
+                        incorrect=true;
+                    }
+                }
+            }
+        }
+    }
+
+    if(incorrect){
+        show_error_message();
+    }
+}
+
+function remove_errors(){
+    //remove the faulty boxes
+    //remove the error message
+    $('#error_message').hide();
+}
+
+function show_error_message(){
+    //show the error message
+    $('#error_message').show();
+}
+
+function set_sudoku_box_as_faulty(row, col){
+    //set the box as faulty
+}

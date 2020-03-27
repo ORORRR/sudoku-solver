@@ -1,7 +1,3 @@
-/*body {*/
-/*    font-family: 'Poppins', sans-serif;*/
-/*}*/
-
 #sudoku td {
     border: 1px solid #858585;
     height: 50px;
@@ -9,36 +5,34 @@
     text-align: center;
 }
 
-/* sudoku border*/
+/* 
+    sudoku grid border 
+*/
 #sudoku tr:first-child td {
     border-top-width: 3px;
 }
-
 #sudoku tr:nth-child(3) td, #sudoku tr:nth-child(6) td, #sudoku tr:last-child td {
     border-bottom-width: 3px;
 }
-
 #sudoku tr td:first-child {
     border-left-width: 3px;
 }
-
 #sudoku tr td:nth-child(3), #sudoku tr td:nth-child(6), #sudoku tr td:last-child {
     border-right-width: 3px;
 }
 
-
+/* 
+    sudoku case status 
+*/
 #sudoku .solved {
     color: deeppink;
 }
-
 #sudoku .original {
     font-weight: bold;
 }
-
-#sudoku_txt_value{
-    display: none;
-}
-
 #sudoku .selected-box {
     background-color: lightblue;
+}
+#sudoku .error-box {
+    background-color: lightcoral;
 }

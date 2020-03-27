@@ -2,28 +2,26 @@
 {% load sudoku_solver_app_extras %}
 
 {% block content %}
-    <div class="container">
-        <table id="sudoku" class="">
-            {% for row in solved_sudoku %}
-                <tr>
-                    {% for col in  row %}
-                        {% get_sudoku_box original_sudoku forloop.parentloop.counter0 forloop.counter0 as original_current_box %}
-                        {% get_sudoku_box solved_sudoku forloop.parentloop.counter0 forloop.counter0 as solved_current_box %}
+    <table id="sudoku" class="">
+        {% for row in solved_sudoku %}
+            <tr>
+                {% for col in  row %}
+                    {% get_sudoku_box original_sudoku forloop.parentloop.counter0 forloop.counter0 as original_current_box %}
+                    {% get_sudoku_box solved_sudoku forloop.parentloop.counter0 forloop.counter0 as solved_current_box %}
 
-                        {% if  original_current_box != 0 %}
-                            <td class="original">
-                                {{ original_current_box }}
-                            </td>
-                        {% else %}
-                            <td class="solved">
-                                {{ solved_current_box }}
-                            </td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
+                    {% if  original_current_box != 0 %}
+                        <td class="original">
+                            {{ original_current_box }}
+                        </td>
+                    {% else %}
+                        <td class="solved">
+                            {{ solved_current_box }}
+                        </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
 
-        <a id="btn-new_sudoku" href="{% url 'sudoku_solver_app:index' %}" role="button" class="btn btn-dark">Solve another Sudoku</a>
-    </div>
+    <a id="btn-new_sudoku" href="{% url 'sudoku_solver_app:index' %}" role="button" class="btn btn-dark">Solve another Sudoku</a>
 {% endblock %}

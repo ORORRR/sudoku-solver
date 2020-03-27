@@ -3,28 +3,31 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
-        <table id="sudoku" class="">
-            {% for row in sudoku %}
-                <tr>
-                    {% for col in  row %}
-                        {% get_sudoku_box sudoku forloop.parentloop.counter0 forloop.counter0 as current_box %}
-                        <td>
-                            {% if col != 0 %}
-                                {{ current_box }}
-                            {% endif %}
-                        </td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
+    <table id="sudoku" class="">
+        {% for row in sudoku %}
+            <tr>
+                {% for col in  row %}
+                    {% get_sudoku_box sudoku forloop.parentloop.counter0 forloop.counter0 as current_box %}
+                    <td>
+                        {% if col != 0 %}
+                            {{ current_box }}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
 
-        <form action="{% url 'sudoku_solver_app:index' %}" method="post">
-            {% csrf_token %}
-            <input id="sudoku_txt_value" type="text" value="" name="sudoku">
-            <button id="btn-solve" type="submit" class="btn btn-dark">Solve</button>
-        </form>
+    <form action="{% url 'sudoku_solver_app:index' %}" method="post">
+        {% csrf_token %}
+        <input id="sudoku_txt_value" type="text" value="" name="sudoku" style='display: none'>
+        <button id="btn-solve" type="submit" class="btn btn-dark">Solve</button>
+    </form>
+   
+    <div id="error_message" class="alert alert-danger" role="alert">
+        The sudoku is not correct !
     </div>
+
 {% endblock %}
 
 {% block javascripts %}
