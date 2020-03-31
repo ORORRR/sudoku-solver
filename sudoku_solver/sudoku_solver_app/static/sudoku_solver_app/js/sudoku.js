@@ -21,7 +21,6 @@ $(document).ready(function () {
                 selected_box = null;
             }
         }
-
     });
 
     //--------------------------------------
@@ -74,6 +73,8 @@ $(document).ready(function () {
             case 32:
             case "Backspace":
             case 8:
+            case 48:
+            case '0':
                 number = "";
                 break;
             default:
@@ -83,8 +84,47 @@ $(document).ready(function () {
             selected_box.text(number);
             update_json_representation_of_sudoku();
         }
-
     });
+
+    //--------------------------------------
+    //     user moves selected box
+    //--------------------------------------
+    $(document).keyup(function (event) {
+
+        let key = event.key || event.keyCode;
+
+        let direction = null;
+
+        switch (key) {
+            case 'ArrowLeft':
+            case 37:
+                direction = 'left';
+                break;
+            case 'ArrowUp':
+            case 38:
+                direction = 'up';
+                break;
+            case 'ArrowRight':
+            case 39:
+                direction = 'right';
+                break;
+            case 'ArrowDown':
+            case 40:
+                direction = 'down';
+                break;
+            default:
+        }
+
+        if (selected_box != null && direction != null) {
+            next_box = next_selected_box(direction, selected_box);
+
+            if (next_box != null) {
+                selected_box.toggleClass('selected-box');
+                selected_box = next_box;
+                selected_box.toggleClass('selected-box');
+            }
+        }
+    })
 });
 
 function get_sudoku_obj() {
@@ -223,4 +263,36 @@ function set_sudoku_square_as_faulty(row_sqaure, col_square) {
 
 function set_sudoku_box_as_faulty(row, col) {
     $(`#sudoku tr:eq(${row}) td:eq(${col})`).addClass('error-box');
+}
+
+function next_selected_box(direction, selected_box) {
+    row = selected_box.parent();
+    current_row = row.index();
+    current_col = selected_box.index();
+
+    switch (direction) {
+        case 'left':
+            if (current_col > 0) {
+                return row.find(`td:eq(${current_col - 1})`);
+            }
+            break;
+        case 'up':
+            if (current_row > 0) {
+                return $(`#sudoku tr:eq(${current_row - 1}) td:eq(${current_col})`);
+            }
+            break;
+        case 'right':
+            if (current_col < 8) {
+                return row.find(`td:eq(${current_col + 1})`);
+            }
+            break;
+        case 'down':
+            if (current_row < 8) {
+                return $(`#sudoku tr:eq(${current_row + 1}) td:eq(${current_col})`);
+            }
+            break;
+        default:
+    }
+
+    return null;
 }
