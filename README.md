@@ -1,7 +1,7 @@
 # sudoku-solver
 A sudoku solver webbapp made with python Django and google OR-tools library
 
-This project was created as a spike in order to test the usage of Django with Google ortools
+This project was created as a spike in order to test the usage of Google ortools in a Django project 
 
 # Installation
 install the requierements
