@@ -18,6 +18,8 @@
         {% endfor %}
     </table>
 
+    <button id="btn-clear" class="btn btn-dark">Clear</button>
+
     <form action="{% url 'sudoku_solver_app:index' %}" method="post">
         {% csrf_token %}
         <input id="sudoku_txt_value" type="text" value="" name="sudoku" style='display: none'>

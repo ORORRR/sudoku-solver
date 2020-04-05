@@ -125,6 +125,14 @@ $(document).ready(function () {
             }
         }
     })
+
+    //--------------------------------------
+    //     clear the sudoku
+    //--------------------------------------
+    $("#btn-clear").on('click', function (event) {
+        $("#sudoku td").text('');
+        update_json_representation_of_sudoku();
+    });
 });
 
 function get_sudoku_obj() {
