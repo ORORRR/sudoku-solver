@@ -239,11 +239,11 @@ function sudoku_validation() {
 
 function remove_errors() {
     $(`#sudoku tr td`).removeClass('error-box');
-    $('#error_message').hide();
+    $('#error_message').empty();
 }
 
 function show_error_message() {
-    $('#error_message').show();
+    $('#error_message').append('<div class="alert alert-danger" role="alert">The sudoku is not correct !</div>');
 }
 
 function set_sudoku_line_as_faulty(row) {
