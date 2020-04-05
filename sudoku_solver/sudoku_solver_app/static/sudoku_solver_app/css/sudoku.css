@@ -2,9 +2,16 @@
     sudoku box
 */
 #sudoku td {
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+    #sudoku td {
+        height: 50px;
+        width: 50px;
+    }
 }
 
 /* 
