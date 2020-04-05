@@ -2,6 +2,12 @@
 {% load sudoku_solver_app_extras %}
 
 {% block content %}
+    <div id="action-buttons">
+        <a id="btn-new_sudoku" href="{% url 'sudoku_solver_app:index' %}" role="button" class="btn btn-dark">
+        Solve another Sudoku
+        </a>
+    </div>
+
     <table id="sudoku" class="">
         {% for row in solved_sudoku %}
             <tr>
@@ -22,6 +28,4 @@
             </tr>
         {% endfor %}
     </table>
-
-    <a id="btn-new_sudoku" href="{% url 'sudoku_solver_app:index' %}" role="button" class="btn btn-dark">Solve another Sudoku</a>
 {% endblock %}

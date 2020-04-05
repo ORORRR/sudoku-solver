@@ -1,0 +1,13 @@
+#content {
+    margin-top: 15px;
+}
+
+#action-buttons {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+#btn-clear {
+    margin-right: 30px;
+}

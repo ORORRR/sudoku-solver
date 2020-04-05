@@ -3,6 +3,26 @@
 {% load static %}
 
 {% block content %}
+    <div id="action-buttons">
+        <button id="btn-clear" class="btn btn-dark">
+            <i class="fas fa-trash-alt"></i>
+            Clear
+        </button>
+
+        <form action="{% url 'sudoku_solver_app:index' %}" method="post">
+            {% csrf_token %}
+            <input id="sudoku_txt_value" type="text" value="" name="sudoku" style='display: none'>
+            <button id="btn-solve" type="submit" class="btn btn-dark">
+                Solve
+                <i class="far fa-lightbulb"></i>
+            </button>
+        </form>
+    </div>
+      
+    <div id="error_message" class="alert alert-danger" role="alert">
+        The sudoku is not correct !
+    </div>
+
     <table id="sudoku" class="">
         {% for row in sudoku %}
             <tr>
@@ -17,19 +37,6 @@
             </tr>
         {% endfor %}
     </table>
-
-    <button id="btn-clear" class="btn btn-dark">Clear</button>
-
-    <form action="{% url 'sudoku_solver_app:index' %}" method="post">
-        {% csrf_token %}
-        <input id="sudoku_txt_value" type="text" value="" name="sudoku" style='display: none'>
-        <button id="btn-solve" type="submit" class="btn btn-dark">Solve</button>
-    </form>
-   
-    <div id="error_message" class="alert alert-danger" role="alert">
-        The sudoku is not correct !
-    </div>
-
 {% endblock %}
 
 {% block javascripts %}

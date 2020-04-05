@@ -11,10 +11,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/8f0fc765dc.js" crossorigin="anonymous"></script>
+    
     <!-- Poppins font from fonts.google-->
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 
-     <link rel="stylesheet" href="{% static 'sudoku_solver_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'sudoku_solver_app/css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'sudoku_solver_app/css/sudoku.css' %}">
 
     <title>Sudoku Solver</title>
 </head>
@@ -25,8 +29,12 @@
 </nav>
 
 <div class="container">
-  {% block content %}
-  {% endblock %}
+  <div class="row justify-content-center">
+    <div id="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
 </div>
 
 

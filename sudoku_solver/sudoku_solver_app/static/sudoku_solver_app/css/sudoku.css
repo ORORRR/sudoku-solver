@@ -1,5 +1,7 @@
+/* 
+    sudoku box
+*/
 #sudoku td {
-    border: 1px solid #858585;
     height: 50px;
     width: 50px;
     text-align: center;
@@ -8,6 +10,9 @@
 /* 
     sudoku grid border 
 */
+#sudoku td {
+    border: 1px solid #858585;
+}
 #sudoku tr:first-child td {
     border-top-width: 3px;
 }
@@ -22,7 +27,7 @@
 }
 
 /* 
-    sudoku case status 
+    sudoku box status 
 */
 #sudoku .solved {
     color: deeppink;
