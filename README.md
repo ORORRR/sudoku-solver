@@ -8,9 +8,8 @@ install the requierements
 ```pip install -r requirements.txt```
 
 # Run the application
+navigate to the django project and start the server
 
-## navigate to the django project
 ```cd sudoko_solver```
 
-## start the server
 ```python manage.py runserver```
