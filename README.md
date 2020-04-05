@@ -10,6 +10,6 @@ install the requierements
 # Run the application
 navigate to the django project and start the server
 
-```cd sudoko_solver```
+```cd sudoku_solver```
 
 ```python manage.py runserver```
